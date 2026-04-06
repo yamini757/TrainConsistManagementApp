@@ -4,40 +4,24 @@ public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        // Step 1: Create array of capacities
-        int[] capacities = {72, 56, 24, 70, 60};
+        // Step 1: Create array of bogie names
+        String[] bogieNames = {
+                "Sleeper",
+                "AC Chair",
+                "First Class",
+                "General",
+                "Luxury"
+        };
 
+        // Step 2: Display before sorting
         System.out.println("Before Sorting:");
-        printArray(capacities);
+        System.out.println(Arrays.toString(bogieNames));
 
-        // Step 2: Bubble Sort
-        int n = capacities.length;
+        // Step 3: Sort using Arrays.sort()
+        Arrays.sort(bogieNames);
 
-        for (int i = 0; i < n - 1; i++) {
-
-            for (int j = 0; j < n - i - 1; j++) {
-
-                // Compare adjacent elements
-                if (capacities[j] > capacities[j + 1]) {
-
-                    // Swap
-                    int temp = capacities[j];
-                    capacities[j] = capacities[j + 1];
-                    capacities[j + 1] = temp;
-                }
-            }
-        }
-
-        // Step 3: Display sorted array
-        System.out.println("\nAfter Sorting (Ascending):");
-        printArray(capacities);
-    }
-
-    // Helper method to print array
-    public static void printArray(int[] arr) {
-        for (int val : arr) {
-            System.out.print(val + " ");
-        }
-        System.out.println();
+        // Step 4: Display after sorting
+        System.out.println("\nAfter Sorting (Alphabetical):");
+        System.out.println(Arrays.toString(bogieNames));
     }
 }
