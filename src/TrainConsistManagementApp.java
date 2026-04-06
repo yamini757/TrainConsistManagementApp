@@ -1,46 +1,45 @@
 import java.util.*;
-import java.util.stream.*;
-
-// Bogie class
-class Bogie {
-    String name;
-    int capacity;
-
-    public Bogie(String name, int capacity) {
-        this.name = name;
-        this.capacity = capacity;
-    }
-
-    public void display() {
-        System.out.println("Bogie: " + name + " | Capacity: " + capacity);
-    }
-}
+import java.util.regex.*;
 
 // Main class
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        // Step 1: Create bogie list
-        List<Bogie> bogieList = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
 
-        bogieList.add(new Bogie("Sleeper", 72));
-        bogieList.add(new Bogie("AC Chair", 56));
-        bogieList.add(new Bogie("First Class", 24));
-        bogieList.add(new Bogie("Sleeper", 70));
+        // Step 1: Take user input
+        System.out.print("Enter Train ID: ");
+        String trainId = sc.nextLine();
 
-        // Step 2: Display all bogies
-        System.out.println("All Bogies:");
-        for (Bogie b : bogieList) {
-            b.display();
+        System.out.print("Enter Cargo Code: ");
+        String cargoCode = sc.nextLine();
+
+        // Step 2: Define regex patterns
+        String trainPattern = "TRN-\\d{4}";
+        String cargoPattern = "PET-[A-Z]{2}";
+
+        // Step 3: Compile patterns
+        Pattern p1 = Pattern.compile(trainPattern);
+        Pattern p2 = Pattern.compile(cargoPattern);
+
+        // Step 4: Match inputs
+        Matcher m1 = p1.matcher(trainId);
+        Matcher m2 = p2.matcher(cargoCode);
+
+        // Step 5: Validate
+        if (m1.matches()) {
+            System.out.println("Train ID is VALID");
+        } else {
+            System.out.println("Train ID is INVALID");
         }
 
-        // Step 3: Calculate total seats using Stream + reduce
-        int totalSeats = bogieList.stream()
-                .map(b -> b.capacity)          // extract capacity
-                .reduce(0, Integer::sum);      // sum all values
+        if (m2.matches()) {
+            System.out.println("Cargo Code is VALID");
+        } else {
+            System.out.println("Cargo Code is INVALID");
+        }
 
-        // Step 4: Display total
-        System.out.println("\nTotal Seating Capacity: " + totalSeats);
+        sc.close();
     }
 }
